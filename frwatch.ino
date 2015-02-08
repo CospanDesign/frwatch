@@ -22,7 +22,8 @@ Watch watch;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  //Serial.begin(115200);
+  Serial.begin(57600);
   Serial.println ("Start");
   //init_rtc();
   
@@ -33,7 +34,6 @@ void setup() {
     watch.GREEN_LED_OFF(i);
   }  
 }
-
 
 void update_clock(){
   uint8_t hours;
@@ -74,7 +74,6 @@ void update_clock(){
   //Blue is seconds
   watch.BLUE_LED_ON(seconds);
 }
-
 
 void set_time(){
 }
