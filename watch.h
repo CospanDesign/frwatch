@@ -11,8 +11,6 @@
 
 #include "stdint.h"
 
-
-
 class Watch{
   private:
 

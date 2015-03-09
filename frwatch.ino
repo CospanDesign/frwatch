@@ -17,7 +17,6 @@ uint8_t mode = MODE_CONFIG_HOUR;
 uint16_t rate = 100;
 bool direction = true;
 
-
 Watch watch;
 
 void setup() {
@@ -26,13 +25,13 @@ void setup() {
   Serial.begin(57600);
   Serial.println ("Start");
   //init_rtc();
-  
+
   watch.begin();
   for (int i = 1; i < 13; i = i + 1){
     watch.BLUE_LED_OFF(i);
     watch.RED_LED_OFF(i);
     watch.GREEN_LED_OFF(i);
-  }  
+  }
 }
 
 void update_clock(){
@@ -65,7 +64,7 @@ void update_clock(){
   Serial.print(minutes);
   Serial.print(":");
   Serial.println(seconds);
-  
+
   watch.ALL_LEDS_OFF();
   //Red is hours
   watch.RED_LED_ON(hours);
@@ -83,22 +82,22 @@ void crazy_mode(){
     watch.RED_LED_ON(i);
     watch.GREEN_LED_ON(((i + 6) % 12) + 1);
     watch.BLUE_LED_ON(13 - i);
-    
-    
-    delayMicroseconds(rate);	
-    
-    
+
+
+    delayMicroseconds(rate);
+
+
     watch.RED_LED_OFF(i);
     watch.GREEN_LED_OFF(((i + 6) % 12) + 1);
     watch.BLUE_LED_OFF(13 - i);
-    delayMicroseconds(rate);	
+    delayMicroseconds(rate);
   }
-  
-  
+
+
   if (direction){
     if (rate >= MAX_RATE){
       direction = false;
-    }	
+    }
     else {
       rate += INC_VAL;
     }
@@ -115,11 +114,11 @@ void crazy_mode(){
         rate -= INC_VAL;
       }
     }
-  }	
+  }
 }
 
 void loop() {
-  // put your main code here, to run repeatedly: 
+  // put your main code here, to run repeatedly:
   if (watch.is_button_pressed(0)){
     Serial.println("Button 0 is pressed");
     for (int i = 1; i < 13; i = i + 1){
@@ -127,7 +126,7 @@ void loop() {
       watch.GREEN_LED_OFF(i);
       watch.BLUE_LED_ON(i);
       rate = (uint8_t) MIN_RATE;
-      
+
     }
   }
   else if (watch.is_button_pressed(1)){
@@ -138,11 +137,11 @@ void loop() {
       watch.BLUE_LED_OFF(i);
       rate = MAX_RATE;
     }
-  }		
+  }
   /*
   crazy_mode();
   */
- 
+
   delay(500);
   Serial.print("Seconds: ");
   Serial.println(watch.debug_get_seconds());

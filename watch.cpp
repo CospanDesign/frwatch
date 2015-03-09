@@ -366,6 +366,17 @@ bool Watch::is_button_pressed(uint8_t button){
 				return true;
 			}
 			break;
+    case (2):
+      if (PINJ & 0x10){
+        return true;
+      }
+      break;
+    case (3):
+      if (PINJ & 0x08){
+        return true;
+      }
+
+      break;
 		default:
 			return false;
 	}
